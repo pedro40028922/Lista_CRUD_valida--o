@@ -70,6 +70,24 @@ res.json({
     carro:carro
 })
 })
+Router.put('/pessoas/:id',ValidaçãoAtributos, validacaoPessoa, (req, res) =>{
+    const dados = req.body
+
+    const updados = {
+    id: req.pessoas.id,
+    nome: dados.nome,
+    idade: dados.idade,
+    email: dados.email,
+    telefone: dados.telefone
+    }
+
+    ListaPessoas[res.index] = updados
+
+    res.json({
+    mensagem:'Dados atualizados!',
+    pessoas: updados
+    })
+})
 
 Router.delete('/pessoas/:id', validacaoPessoa, (req,res) =>{
     ListaPessoas.splice(res.index,1)
@@ -81,4 +99,5 @@ Router.get('/pessoas/nome/:nome',(req, res) =>{
     const pessoas = ListaPessoas.filter(pessoas => pessoas.nome.toLowerCase() == nome.toLowerCase())
     res.json(pessoas)
 })
+
 module.exports = Router
